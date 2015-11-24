@@ -1,0 +1,7 @@
+# Nodejs modules
+node_modules/
+
+Svg Assets/
+# Ignore Inkscape .svg in Svg Assets
+# (Contains directory metadata that could compromise privacy)
+# Don't worry, optimised svgs coming later
