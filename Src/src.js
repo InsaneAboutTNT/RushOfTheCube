@@ -4,6 +4,9 @@
  * Last updated 3/10/15
  * */
 
+/**
+* Global CubeGame Instance
+*/
 var CubeGame = function() {
 };
 
@@ -36,13 +39,9 @@ CubeGame.Boot.prototype = {
     },
     preload: function() {
         // This helps alleviate lagginess
-        // Trying to reduce ragequitting due to lag!!
-        
-        // forcesingleupdate forces a logic update every time the loop happens.
-        this.game.forceSingleUpdate = true;
 
         // Set background colour
-        this.game.stage.backgroundColor = 0xe0e0e0;
+        this.game.stage.backgroundColor = "#eeeeee";
         
         var t = this; // Reference to this
         
@@ -177,11 +176,8 @@ CubeGame.Play.prototype = {
         this.obstacles = new CubeGame.Obstacles(this.game);
         this.game.add.existing(this.obstacles);
         // Spawn Timer
-        this.spawner = this.game.time.events.loop(1400, this.spawn, this);
 
-        CubeGame.score = 0; 
-        // Needs to be accessible between game states
-        // so it is declared in CubeGame
+        CubeGame.ScoreManager.resetScore(); 
         
         // Make score text
         this.scoreText = this.game.add.text(40, 20, "Score: " + CubeGame.score.toString(), {
@@ -193,7 +189,7 @@ CubeGame.Play.prototype = {
         
         // Configuration
         
-        /** When you geet a certain score,
+        /** When you get a certain score,
         * there will be a faster spawn rate.
         * This array determines this spawn rates at certain scores.
         *
@@ -204,9 +200,17 @@ CubeGame.Play.prototype = {
         */
         CubeGame.config.spawnIntervals = 
             [{score: 40, interval: 1000},
-             {score: 100, interval: 700},
-             {score: 140, interval: 500}];
+             {score: 100, interval: 800},
+             {score: 140, interval: 700}];
+        
+        // Texture keys. When obstacles spawn
+        // a random texture will be picked
+        // from this array
         CubeGame.obstacleTypes = ["Laser", "Spikes"];
+        
+        // Increase score every 1 second
+        // Score is based on survival time
+        this.game.time.events.loop(1000, this.updateScore, this);
     },
     /**
     * Add event listeners, as in Phaser.Signal's. 
@@ -217,78 +221,22 @@ CubeGame.Play.prototype = {
         // die() method will execute when signal is dispatched
         CubeGame.deadSignal.add(this.die, this);
     },
-    spawn: function() {
-        // Try to fetch an obstacle from the pool
-        // Determines sprite to be used from Game.obstacleTypes
-        var seed = this.game.rnd.integerInRange(0, 1);
-        var yPos = this.game.rnd.integerInRange(50, CubeGame.PageH - 150);    
-        // fetchObstacle method is in the ObstaclePool "pseudoclass" declaration
-        this.obstacles.fetchObstacle(this.game, CubeGame.PageW, yPos, CubeGame.obstacleTypes[seed]);
-    },
-    /**
-    * Method to send signal when player is dead
-    */
-    /*sendDeadSignal: function() {
-        CubeGame.deadSignal.dispatch();
-    },*/
-    /**
-    * Enable collision callback when player hits obstacle. Will call sendDeadSignal
-    */
-    enableOverlap: function(obstacle) {
-        // Signal player is dead if player collides obstacle
-        this.game.physics.arcade.overlap(this.player, obstacle, function() {CubeGame.signal.sendDeadSignal();});
-    },
-    /**
-    * Check if obstacle has been scored.
-    */
-    checkScore: function(obstacle) {
-        // If obstacle exists,
-        // if obstacle has not been already scored, 
-        // if player has passed the obstacle,
-        // obstacle has been scored
-        if (obstacle.exists && !obstacle.hasScored && obstacle.world.x <= this.player.world.x) {
-            this.ping.play();
-            obstacle.hasScored = true;
-            CubeGame.score += 10; // Increase score
-            this.scoreText.setText("Score: " + CubeGame.score.toString()); // Update score on HUD
-        }
-    },
     /**
     * RIP Cube!!!
     */
     die: function() {
-        var t = this;
-        // Hide player
-        this.player.visible = false;
-        
-        // stop() functions will stop objects moving
-        this.obstacles.forEach(function(obstacle) {
-          obstacle.stop();
-        });
-        this.ground.stop();
-        this.game.time.events.remove(this.spawner);
-        
-        this.scoreText.setText("Dead!");
-        
-        // Wait 1 secs then go to Game Over state
-        this.game.time.events.add(1000, function() {
-            t.game.state.start("GameOver");
-        });
+        this.game.state.start("GameOver");
+    },
+    updateScore: function() {
+        CubeGame.ScoreManager.increaseScore(10);
+    },
+    updateScoreText: function() {
+        this.scoreText.setText("Score: " + CubeGame.score);
     },
     update: function() {
-        var spawnIntervalObj;
-        for(i=0;i<CubeGame.config.spawnIntervals.length;i++) {
-            spawnIntervalObj = CubeGame.config.spawnIntervals[i];
-            if(CubeGame.score === spawnIntervalObj.score) {
-                this.spawner.delay = spawnIntervalObj.interval;
-            }
-        }
-        
-        this.obstacles.forEach(function(obstacle) {
-            this.checkScore(obstacle); // Is obstacle scored?
-            this.enableOverlap(obstacle); // This will enable callback when player hits obstacle (and should die.)
-        }, this);
-        
+        //this.game.physics.arcade.overlap(this.player, this.obstacles, function() {CubeGame.deadSignal.dispatch();});
+        this.player.initObstacleCollisions(this.obstacles);
+        this.updateScoreText();
     }
 };
 
@@ -353,6 +301,7 @@ CubeGame.GameOver.prototype = {
 
 CubeGame.Obstacles = function(game) {
     Phaser.Group.call(this, game);
+    this.spawner = this.game.time.events.loop(1400, this.spawn, this);
 };
 CubeGame.Obstacles.prototype = Object.create(Phaser.Group.prototype);
 CubeGame.Obstacles.prototype.constructor = CubeGame.Obstacles;
@@ -373,11 +322,22 @@ CubeGame.Obstacles.prototype.fetchObstacle = function(game, x, y, key) {
     }
     obstacle.reuse(game, x, y, key); // Set up obstacle for use
 };
-/** Built in Phaser function */
 CubeGame.Obstacles.prototype.update = function() {
-    
+    var spawnIntervalObj;
+        for(i=0;i<CubeGame.config.spawnIntervals.length;i++) {
+            spawnIntervalObj = CubeGame.config.spawnIntervals[i];
+            if(CubeGame.score === spawnIntervalObj.score) {
+                this.spawner.delay = spawnIntervalObj.interval;
+        }
+    }
 };
-
+CubeGame.Obstacles.prototype.spawn = function() {
+        // Try to fetch an obstacle from the pool
+        // Determines sprite to be used from Game.obstacleTypes
+        var seed = this.game.rnd.integerInRange(0, 1);
+        var yPos = this.game.rnd.integerInRange(50, CubeGame.PageH - 150);    
+        this.fetchObstacle(this.game, CubeGame.PageW, yPos, CubeGame.obstacleTypes[seed]);
+};
 // -------------------------------------------------------------
 
 CubeGame.Player = function(game, ground) {
@@ -393,13 +353,16 @@ CubeGame.Player.prototype.jump = function() {
     // Jump
     this.body.velocity.y = CubeGame.config.JumpVelocity;
 };
+CubeGame.Player.prototype.initObstacleCollisions = function(obstGroup) {
+    this.game.physics.arcade.collide(this, obstGroup, function(){CubeGame.deadSignal.dispatch();});
+};
 CubeGame.Player.prototype.update = function() {
     // Collide player and ground
     // Player is dead if player overlaps ground
     
     // this.game is the reference to the game the player is running in.
-    this.game.physics.arcade.overlap(this, this.ground, function() {CubeGame.signal.sendDeadSignal();});
-    if(this.y < 0)CubeGame.signal.sendDeadSignal();
+    this.game.physics.arcade.overlap(this, this.ground, function() {CubeGame.deadSignal.dispatch();});
+    if(this.y < 0)CubeGame.deadSignal.dispatch();
 };
 // --------------------------------------------------------------
 
@@ -469,4 +432,17 @@ CubeGame.Ground.prototype.constructor = CubeGame.Ground;
 
 CubeGame.Ground.prototype.stop = function() {
     this.autoScroll(0, 0);
+};
+/**
+* This signal is to be fired when
+* the player is dead.
+*/
+CubeGame.deadSignal = new Phaser.Signal();
+
+CubeGame.ScoreManager = function() {};
+CubeGame.ScoreManager.increaseScore = function(increment) {
+    CubeGame.score += increment;
+};
+CubeGame.ScoreManager.resetScore = function() {
+    CubeGame.score = 0;
 };

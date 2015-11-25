@@ -159,11 +159,11 @@ CubeGame.Play.prototype = {
         this.game.stage.backgroundColor = "#eeeeee";
 
         // Create ground
-        this.ground = new CubeGame.Ground(this.game);
-        this.game.add.existing(this.ground);
+        //this.ground = new CubeGame.Ground(this.game);
+        //this.game.add.existing(this.ground);
         
         // Player
-        this.player = new CubeGame.Player(this.game, this.ground);
+        this.player = new CubeGame.Player(this.game);
         this.game.add.existing(this.player);
         
         // Sound
@@ -211,6 +211,8 @@ CubeGame.Play.prototype = {
         // Increase score every 1 second
         // Score is based on survival time
         this.game.time.events.loop(1000, this.updateScore, this);
+        
+        
     },
     /**
     * Add event listeners, as in Phaser.Signal's. 

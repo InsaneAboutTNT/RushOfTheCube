@@ -40,16 +40,16 @@ CubeGame.Obstacles.prototype.spawn = function() {
         // Try to fetch an obstacle from the pool
         // Determines sprite to be used from Game.obstacleTypes
         var seed = this.game.rnd.integerInRange(0, 1);
-        var yPos = this.game.rnd.integerInRange(50, CubeGame.PageH - 150);    
+        var yPos = this.game.rnd.integerInRange(50, CubeGame.PageH - 100);    
         this.fetchObstacle(this.game, CubeGame.PageW, yPos, CubeGame.obstacleTypes[seed]);
+    console.log(this);
 };
 // -------------------------------------------------------------
 
-CubeGame.Player = function(game, ground) {
+CubeGame.Player = function(game) {
     Phaser.Sprite.call(this, game, 250, CubeGame.PageH/3,"Textures" ,"Player");
     game.physics.arcade.enable(this);
     
-    this.ground = ground;
 };
 CubeGame.Player.prototype = Object.create(Phaser.Sprite.prototype);
 CubeGame.Player.prototype.constructor = CubeGame.Player;
@@ -66,8 +66,8 @@ CubeGame.Player.prototype.update = function() {
     // Player is dead if player overlaps ground
     
     // this.game is the reference to the game the player is running in.
-    this.game.physics.arcade.overlap(this, this.ground, function() {CubeGame.deadSignal.dispatch();});
     if(this.y < 0)CubeGame.deadSignal.dispatch();
+    if(this.y > CubeGame.PageH - 60)CubeGame.deadSignal.dispatch();
 };
 // --------------------------------------------------------------
 
@@ -118,23 +118,3 @@ CubeGame.Obstacle.prototype.stop = function() {
 
 
 // ---------------------------------------------------------------
-
-/**
-* The ground.
-*/
-CubeGame.Ground = function(game) {
-    Phaser.TileSprite.call(this, game, 0, CubeGame.PageH, CubeGame.PageW, 100, "Textures", "Ground");
-    this.autoScroll(CubeGame.config.ScrollVelocity, 0);
-    // Set position based on left bottom corner
-    this.anchor.setTo(0, 1);
-    game.physics.arcade.enable(this);
-
-    this.body.immovable = true;
-    this.body.allowGravity = false;
-};
-CubeGame.Ground.prototype = Object.create(Phaser.TileSprite.prototype);
-CubeGame.Ground.prototype.constructor = CubeGame.Ground;
-
-CubeGame.Ground.prototype.stop = function() {
-    this.autoScroll(0, 0);
-};
