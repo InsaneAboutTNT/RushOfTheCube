@@ -5,10 +5,11 @@ An infinite runner game built with the Phaser game engine.
 
 Only one thing... click to jump and avoid obstacles!
 
+Licensed under the MIT license.
+
 Images created in Inkscape, audio created in Audacity.
 
 ## Screenshots!
 ![](titlescreenshot.png)
 
-## License
-Licensed under the MIT license.
+
