@@ -17,7 +17,7 @@ CubeGame.Boot.prototype = {
         
         // Load google font script.
         // Note: may use own font and remove this script later
-        //this.game.load.script("webfont", "//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js");
+        this.game.load.script("webfont", "//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js");
 
         // Important! Make game correctly scale.
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -25,7 +25,8 @@ CubeGame.Boot.prototype = {
         
         CubeGame.config.Game = this.game;
         
-        CubeGame.config.Font = "Arial";
+        // 
+        CubeGame.config.Font = "Lato";
         this.startSetup();
 
         // Google font config.
