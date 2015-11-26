@@ -31,17 +31,17 @@ CubeGame.Obstacles.prototype.update = function() {
     var spawnIntervalObj;
         for(i=0;i<CubeGame.config.spawnIntervals.length;i++) {
             spawnIntervalObj = CubeGame.config.spawnIntervals[i];
-            if(CubeGame.score === spawnIntervalObj.score) {
+            if(CubeGame.Score === spawnIntervalObj.score) {
                 this.spawner.delay = spawnIntervalObj.interval;
         }
     }
 };
 CubeGame.Obstacles.prototype.spawn = function() {
         // Try to fetch an obstacle from the pool
-        // Determines sprite to be used from Game.obstacleTypes
+        // Determines sprite to be used from Game.config.obstacleTypes
         var seed = this.game.rnd.integerInRange(0, 1);
-        var yPos = this.game.rnd.integerInRange(50, CubeGame.PageH - 100);    
-        this.fetchObstacle(this.game, CubeGame.PageW, yPos, CubeGame.obstacleTypes[seed]);
+        var yPos = this.game.rnd.integerInRange(50, CubeGame.config.PageH - 100);    
+        this.fetchObstacle(this.game, CubeGame.config.PageW, yPos, CubeGame.config.obstacleTypes[seed]);
     console.log(this);
 };
 

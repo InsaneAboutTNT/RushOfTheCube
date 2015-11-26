@@ -280,7 +280,7 @@ CubeGame.GameOver.prototype = {
         this.buttonsGroup.add(this.replayButton);
         this.buttonsGroup.add(this.menuButton);
         
-        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:CubeGame.PageW + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
+        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:CubeGame.config.PageW + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
     },
     startPlay: function() {
         this.game.state.start("Play");
@@ -335,13 +335,13 @@ CubeGame.Obstacles.prototype.spawn = function() {
         // Try to fetch an obstacle from the pool
         // Determines sprite to be used from Game.obstacleTypes
         var seed = this.game.rnd.integerInRange(0, 1);
-        var yPos = this.game.rnd.integerInRange(50, CubeGame.PageH - 150);    
-        this.fetchObstacle(this.game, CubeGame.PageW, yPos, CubeGame.obstacleTypes[seed]);
+        var yPos = this.game.rnd.integerInRange(50, CubeGame.config.PageH - 150);    
+        this.fetchObstacle(this.game, CubeGame.config.PageW, yPos, CubeGame.obstacleTypes[seed]);
 };
 // -------------------------------------------------------------
 
 CubeGame.Player = function(game, ground) {
-    Phaser.Sprite.call(this, game, 250, CubeGame.PageH/3,"Textures" ,"Player");
+    Phaser.Sprite.call(this, game, 250, CubeGame.config.PageH/3,"Textures" ,"Player");
     game.physics.arcade.enable(this);
     
     this.ground = ground;
@@ -418,7 +418,7 @@ CubeGame.Obstacle.prototype.stop = function() {
 * The ground.
 */
 CubeGame.Ground = function(game) {
-    Phaser.TileSprite.call(this, game, 0, CubeGame.PageH, CubeGame.PageW, 100, "Textures", "Ground");
+    Phaser.TileSprite.call(this, game, 0, CubeGame.config.PageH, CubeGame.config.PageW, 100, "Textures", "Ground");
     this.autoScroll(CubeGame.config.ScrollVelocity, 0);
     // Set position based on left bottom corner
     this.anchor.setTo(0, 1);

@@ -20,7 +20,7 @@ CubeGame.GameOver.prototype = {
         });
         
         // Score text
-        var scoreStr = CubeGame.score.toString()+" pts";
+        var scoreStr = CubeGame.Score.toString()+" pts";
         this.points = this.game.add.text(150, 120, scoreStr, {
             font: "bold 120px " + CubeGame.config.Font,
             fill: "#3498db"
@@ -39,7 +39,7 @@ CubeGame.GameOver.prototype = {
         this.buttonsGroup.add(this.replayButton);
         this.buttonsGroup.add(this.menuButton);
         
-        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:CubeGame.PageW + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
+        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:CubeGame.config.PageW + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
     },
     startPlay: function() {
         this.game.state.start("Play");

@@ -6,8 +6,8 @@ CubeGame.deadSignal = new Phaser.Signal();
 
 CubeGame.ScoreManager = function() {};
 CubeGame.ScoreManager.increaseScore = function(increment) {
-    CubeGame.score += increment;
+    CubeGame.Score += increment;
 };
 CubeGame.ScoreManager.resetScore = function() {
-    CubeGame.score = 0;
+    CubeGame.Score = 0;
 };

@@ -1,7 +1,7 @@
 // -------------------------------------------------------------
 
 CubeGame.Player = function(game) {
-    Phaser.Sprite.call(this, game, 250, CubeGame.PageH/3,"Textures" ,"Player");
+    Phaser.Sprite.call(this, game, 250, CubeGame.config.PageH/3,"Textures" ,"Player");
     game.physics.arcade.enable(this);
     
 };
@@ -21,5 +21,5 @@ CubeGame.Player.prototype.update = function() {
     
     // this.game is the reference to the game the player is running in.
     if(this.y < 0)CubeGame.deadSignal.dispatch();
-    if(this.y > CubeGame.PageH - 60)CubeGame.deadSignal.dispatch();
+    if(this.y > CubeGame.config.PageH - 60)CubeGame.deadSignal.dispatch();
 };

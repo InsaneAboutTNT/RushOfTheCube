@@ -60,7 +60,7 @@ CubeGame.Play.prototype = {
         CubeGame.ScoreManager.resetScore(); 
         
         // Make score text
-        this.scoreText = this.game.add.text(40, 20, "Score: " + CubeGame.score.toString(), {
+        this.scoreText = this.game.add.text(40, 20, "Score: " + CubeGame.Score.toString(), {
             font: "40px " + CubeGame.config.Font,
             fill: "#5f5f5f"
         });
@@ -86,7 +86,7 @@ CubeGame.Play.prototype = {
         // Texture keys. When obstacles spawn
         // a random texture will be picked
         // from this array
-        CubeGame.obstacleTypes = ["Laser", "Spikes"];
+        CubeGame.config.obstacleTypes = ["Laser", "Spikes"];
         
         // Increase score every 1 second
         // Score is based on survival time
@@ -113,7 +113,7 @@ CubeGame.Play.prototype = {
         CubeGame.ScoreManager.increaseScore(10);
     },
     updateScoreText: function() {
-        this.scoreText.setText("Score: " + CubeGame.score);
+        this.scoreText.setText("Score: " + CubeGame.Score);
     },
     update: function() {
         //this.game.physics.arcade.overlap(this.player, this.obstacles, function() {CubeGame.deadSignal.dispatch();});
