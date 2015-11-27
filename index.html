@@ -13,6 +13,7 @@
         <script src = "Src/Setup.js"></script>
         <script src = "Src/Menu.js"></script>
         <script src = "Src/GameOver.js"></script>
+        <script src = "Src/Credits.js"></script>
 <!--        <script src="Src/src.min.js"></script>-->
     </head>
     <body>
@@ -26,6 +27,7 @@
                 game.state.add("Boot", CubeGame.Boot);
                 game.state.add("Menu", CubeGame.Menu);
                 game.state.add("Play", CubeGame.Play);
+                game.state.add("Credits", CubeGame.Credits);
                 game.state.add("GameOver", CubeGame.GameOver);
                 game.state.start("Boot");
             })();
