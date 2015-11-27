@@ -11,10 +11,11 @@ CubeGame.Menu.prototype = {
         this.playButton = this.game.add.button(400, 350, "Textures", this.startPlay, this);
         this.playButton.frameName = "PlayButton";
         
-        this.helpText = this.game.add.text(250, 70, "Click with mouse to jump", {
-            font: "30px " + CubeGame.config.Font,
-            fill: "#5f5f5f"
-        });
+        this.helpText = CubeGame.factory.addText(250, 70, "Click with mouse to jump", 30, "#5f5f5f");
+            //this.game.add.text(250, 70, "Click with mouse to jump", {
+            //font: "30px " + CubeGame.config.Font,
+            //fill: "#5f5f5f"
+        //});
         
         // Bounce logo in from up
         this.logoBounceIn = this.game.add.tween(this.logo).from({y:-300}, 500, Phaser.Easing.Sinusoidal.Out).start();

@@ -14,17 +14,18 @@ CubeGame.GameOver.prototype = {
         this.gameOverGroup = this.game.add.group();
         this.buttonsGroup = this.game.add.group();
         
-        this.scoreIs = this.game.add.text(150, 50, "You got", {
-            font: "30px " + CubeGame.config.Font,
-            fill: "#5f5f5f"
-        });
-        
-        // Score text
+//        this.scoreIs = this.game.add.text(150, 50, "You got", {
+//            font: "30px " + CubeGame.config.Font,
+//            fill: "#5f5f5f"
+//        });
+        this.scoreIs = CubeGame.factory.addText(150, 50, "You got", 30, "#5f5f5f");
+//        // Score text
         var scoreStr = CubeGame.Score.toString()+" pts";
-        this.points = this.game.add.text(150, 120, scoreStr, {
-            font: "bold 120px " + CubeGame.config.Font,
-            fill: "#3498db"
-        });
+//        this.points = this.game.add.text(150, 120, scoreStr, {
+//            font: "bold 120px " + CubeGame.config.Font,
+//            fill: "#3498db"
+//        });
+        this.points = CubeGame.factory.addText(150, 120, scoreStr, 120, "#3498db");
                 
         // Add these elements to the group
         this.gameOverGroup.add(this.scoreIs);

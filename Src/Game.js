@@ -60,10 +60,11 @@ CubeGame.Play.prototype = {
         CubeGame.ScoreManager.resetScore(); 
         
         // Make score text
-        this.scoreText = this.game.add.text(40, 20, "Score: " + CubeGame.Score.toString(), {
-            font: "40px " + CubeGame.config.Font,
-            fill: "#5f5f5f"
-        });
+//        this.scoreText = this.game.add.text(40, 20, "Score: " + CubeGame.Score.toString(), {
+//            font: "40px " + CubeGame.config.Font,
+//            fill: "#5f5f5f"
+//        });
+        this.scoreText = CubeGame.factory.addText(40, 20, "Score: 0", 40, "#5f5f5f");
         
         this.scoreTextSlideIn = this.game.add.tween(this.scoreText).from({x:-300}, 300, Phaser.Easing.Sinusoidal.Out).start();
         
