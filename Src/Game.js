@@ -101,6 +101,9 @@ CubeGame.Play.prototype = {
     addEventListeners: function() {
         this.input.onDown.add(this.player.jump, this.player);
         
+        this.spaceBarKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        this.spaceBarKey.onDown.add(this.player.jump, this.player);
+        
         // die() method will execute when signal is dispatched
         CubeGame.deadSignal.add(this.die, this);
     },

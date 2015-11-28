@@ -14,7 +14,7 @@ CubeGame.Menu.prototype = {
         this.creditsButton = this.game.add.button(100, 500, "Textures", this.creditsState, this);
         this.creditsButton.frameName = "CreditsButton";
         
-        this.helpText = CubeGame.factory.addText(250, 70, "Click with mouse to jump", 30, "#5f5f5f");
+        this.helpText = CubeGame.factory.addText(250, 70, "Click with mouse or spacebar to jump", 25, "#5f5f5f");
             //this.game.add.text(250, 70, "Click with mouse to jump", {
             //font: "30px " + CubeGame.config.Font,
             //fill: "#5f5f5f"
