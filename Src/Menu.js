@@ -19,10 +19,13 @@ CubeGame.Menu.prototype = {
             //font: "30px " + CubeGame.config.Font,
             //fill: "#5f5f5f"
         //});
+        // Version
+        this.versionText = CubeGame.factory.addText(900, 500, "v1.0.0", 30, "#5f5f5f");
+
         
         // Bounce logo in from up
         this.logoBounceIn = this.game.add.tween(this.logo).from({y:-300}, 500, Phaser.Easing.Sinusoidal.Out).start();
-        
+
         // Bounce logo up and down
         this.logoUpDown = this.game.add.tween(this.logo)
             .to({y: 120}, 500, Phaser.Easing.Linear.None)
@@ -39,6 +42,8 @@ CubeGame.Menu.prototype = {
         // Slide in credits button from right
         this.creditsButtonSlideIn = this.game.add.tween(this.creditsButton)
             .from({x:1500}, 1000, Phaser.Easing.Sinusoidal.Out).start();
+        this.versionTextButtonSlideIn = this.game.add.tween(this.versionText.scale)
+            .from({x: 0, y: 0}, 300, Phaser.Easing.Sinusoidal.Out).start();
     },
     /**
     * Start game when play button clicked
