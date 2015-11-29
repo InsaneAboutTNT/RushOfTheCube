@@ -40,7 +40,7 @@ CubeGame.Obstacles.prototype.spawn = function() {
         // Try to fetch an obstacle from the pool
         // Determines sprite to be used from Game.config.obstacleTypes
         var seed = this.game.rnd.integerInRange(0, 1);
-        var yPos = this.game.rnd.integerInRange(50, CubeGame.config.PageH - 100);    
+        var yPos = this.game.rnd.integerInRange(50, CubeGame.config.PageH - 50);    
         this.fetchObstacle(this.game, CubeGame.config.PageW, yPos, CubeGame.config.obstacleTypes[seed]);
     console.log(this);
 };
