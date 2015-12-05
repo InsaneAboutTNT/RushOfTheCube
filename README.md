@@ -1,13 +1,15 @@
 # Rush Of The Cube
 ## An adventure of the Cube
 
-An infinite runner game built with the Phaser game engine.
+![](Assets/Logo.png)
 
-Only one thing... click to jump and avoid obstacles!
+An **open source** infinite runner game built with the Phaser game engine featuring **the Cube**.
+
+Only one thing... click/tap spacebar to jump and avoid obstacles!
+
+The game should work on mobile, but it hasn't been tested on mobile yet...
 
 More features coming soon!
-
-Licensed under the MIT license.
 
 Images created in Inkscape, audio created in Audacity.
 
@@ -21,4 +23,6 @@ Probably...
 ![](titlescreenshot.png)
 ![](gamescreenshot.png)
 
+## License
 
+Licensed under the MIT license.
