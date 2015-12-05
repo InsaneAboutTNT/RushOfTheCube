@@ -12,6 +12,14 @@ CubeGame.ScoreManager.resetScore = function() {
     CubeGame.Score = 0;
 };
 
+CubeGame.AudioManager = function() {};
+CubeGame.AudioManager.loadAudio = function(sfx) {
+    this.sfx = sfx;
+};
+CubeGame.AudioManager.playAudio = function(key) {
+    this.sfx.play(key);
+};
+
 CubeGame.factory = function() {}
 CubeGame.factory.addText = function(x, y, text, size, colour) {
     return CubeGame.config.Game.add.text(x, y, text, {

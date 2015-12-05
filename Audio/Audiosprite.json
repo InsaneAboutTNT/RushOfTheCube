@@ -1,0 +1,19 @@
+{
+  "resources": [
+    "Audio/Audiosprite.ogg"
+  ],
+  "spritemap": {
+    "Death": {
+      "start": 0,
+      "end": 0.21043083900226758,
+      "loop": false,
+      "priority": 0
+    },
+    "Ping": {
+      "start": 2,
+      "end": 2.108843537414966,
+      "loop": false,
+      "priority": 0
+    }
+  }
+}
