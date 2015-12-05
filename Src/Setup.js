@@ -65,10 +65,14 @@ CubeGame.Setup.prototype = {
         var atlasSettings = CubeGame.config.AtlasSettings;
         
         this.game.load.atlasJSONHash(atlasSettings.Name, atlasSettings.Img, atlasSettings.JSON);
-        this.game.load.audio("Ping", ["Audio/Ping.ogg"]);
+        //this.game.load.audio("Ping", ["Audio/Ping.ogg"]);
+        this.game.load.audiosprite("Audiosprite", "Audio/Audiosprite.ogg", "Audio/Audiosprite.json");
         // Google font config
     },
     create: function() {
+        var audiosprite = this.game.add.audioSprite("Audiosprite");
+        
+        CubeGame.AudioManager.loadAudio(audiosprite);
         this.loaded.setText("Loaded!");
         
         var t = this;

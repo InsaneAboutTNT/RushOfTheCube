@@ -1,6 +1,14 @@
 module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
+        audiosprite: {
+            all: {
+                output: "Audio/Audiosprite",
+                files: "Audio/Death.ogg Audio/Ping.ogg",
+                export: "ogg",
+                ogg_to_oga: false
+            }
+        },
         // First concatenate...
         concat: {   
             dist: {
@@ -24,7 +32,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-concat");
 
     grunt.loadNpmTasks("grunt-contrib-uglify");
+    
+    grunt.loadNpmTasks("grunt-audiosprite");
 
-    grunt.registerTask("default", ["concat","uglify"]);
+    grunt.registerTask("default", ["audiosprite", "concat", "uglify"]);
 
 };

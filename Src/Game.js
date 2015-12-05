@@ -47,8 +47,9 @@ CubeGame.Play.prototype = {
         this.game.add.existing(this.player);
         
         // Sound
-        this.ping = this.game.add.audio("Ping");
-        this.ping.play();
+        //this.ping = this.game.add.audio("Ping");
+        //this.ping.play();
+        CubeGame.AudioManager.playAudio("Ping");
 
         this.addEventListeners(); // add input listeners
 
@@ -111,6 +112,8 @@ CubeGame.Play.prototype = {
     * RIP Cube!!!
     */
     die: function() {
+        CubeGame.AudioManager.playAudio("Death");
+        
         this.game.state.start("GameOver");
     },
     updateScore: function() {
