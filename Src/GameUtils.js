@@ -27,3 +27,11 @@ CubeGame.factory.addText = function(x, y, text, size, colour) {
         fill: colour
     });
 };
+
+CubeGame.DataManager = function() {};
+CubeGame.DataManager.setHiscore = function(score) {
+    localStorage.setItem("CubeGameHiscore", score.toString());
+};
+CubeGame.DataManager.getHiscore = function() {
+    return parseFloat(localStorage.getItem("CubeGameHiscore"));
+}

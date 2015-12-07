@@ -5,31 +5,65 @@
 CubeGame.GameOver = function() {
 };
 CubeGame.GameOver.prototype = {
+    evaluateHiscore: function() {
+        var hiscore = 0;
+        var curHiscore = CubeGame.DataManager.getHiscore();
+        var curScore = CubeGame.Score;
+        if (curScore > curHiscore) {
+            hiscore = curScore;
+        }
+        else hiscore = curHiscore;
+        console.log(hiscore);
+        return hiscore;
+    },
     preload: function() {
     },
     create: function() {
+        
+        
         this.game.stage.backgroundColor = "#eeeeee";
 
         // Group contains elements that show score.
         this.gameOverGroup = this.game.add.group();
         this.buttonsGroup = this.game.add.group();
         
-//        this.scoreIs = this.game.add.text(150, 50, "You got", {
+        var hiscore = this.evaluateHiscore();
+        var newHiscore = false;
+        if (hiscore !== CubeGame.DataManager.getHiscore()) {
+            CubeGame.DataManager.setHiscore(hiscore);
+            newHiscore = true;
+        }
+        //        this.scoreIs = this.game.add.text(150, 50, "You got", {
 //            font: "30px " + CubeGame.config.Font,
 //            fill: "#5f5f5f"
 //        });
-        this.scoreIs = CubeGame.factory.addText(150, 50, "You got", 30, "#5f5f5f");
+        this.scoreIsText = CubeGame.factory.addText(150, 50, "The score is...", 30, "#5f5f5f");
 //        // Score text
         var scoreStr = CubeGame.Score.toString()+" pts";
+        var hiscoreStr = "Hiscore: " + CubeGame.DataManager.getHiscore() +" pts";
 //        this.points = this.game.add.text(150, 120, scoreStr, {
 //            font: "bold 120px " + CubeGame.config.Font,
 //            fill: "#3498db"
 //        });
-        this.points = CubeGame.factory.addText(150, 120, scoreStr, 120, "#3498db");
+        if (newHiscore) {
+            this.newHiscoreText = CubeGame.factory.addText(500, 270, "New Hiscore!!!", 30, "#3498db");
+            this.newHiscoreText.anchor.setTo(0.5, 0.5);
+            this.newHiscoreText.angle = -10;
+            this.newHiscoreTextTween = this.game.add.tween(this.newHiscoreText.scale)
+                .to({x: 1.2,  y: 1.2}, 500).to({x: 1,  y: 1}, 500).loop(true).start();
+        }
+        
+        this.scoreText = CubeGame.factory.addText(150, 120, scoreStr, 120, "#3498db");
+        
+        this.hiscoreText = CubeGame.factory.addText(150, 300, hiscoreStr, 30, "#5f5f5f");
                 
         // Add these elements to the group
-        this.gameOverGroup.add(this.scoreIs);
-        this.gameOverGroup.add(this.points);
+        if (newHiscore) {
+            this.gameOverGroup.add(this.newHiscoreText);
+        }
+        this.gameOverGroup.add(this.scoreIsText);
+        this.gameOverGroup.add(this.scoreText);
+        this.gameOverGroup.add(this.hiscoreText);
         
         this.gameOverSlideIn = this.game.add.tween(this.gameOverGroup).from({x:-300}, 200, Phaser.Easing.Sinusoidal.Out).start();
         
