@@ -27,7 +27,13 @@ CubeGame.Boot.prototype = {
         
         // 
         CubeGame.config.Font = "Lato";
-        this.startSetup();
+        CubeGame.DataManager.initialise();
+        
+        // Make sure hiscore is not NaN
+        // (eg. if the player plays the game for the first time)
+        if (isNaN(CubeGame.DataManager.getHiscore())){ CubeGame.DataManager.setHiscore(0);         console.log(CubeGame.DataManager.getHiscore());}
+        
+        //this.startSetup();
 
         // Google font config.
         // Note: may use own font and remove this script later
