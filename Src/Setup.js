@@ -14,10 +14,6 @@ CubeGame.Boot.prototype = {
         this.game.stage.backgroundColor = "#eeeeee";
         
         var t = this; // Reference to this
-        
-        // Load google font script.
-        // Note: may use own font and remove this script later
-        this.game.load.script("webfont", "//ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js");
 
         // Important! Make game correctly scale.
         this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
@@ -33,20 +29,8 @@ CubeGame.Boot.prototype = {
         // (eg. if the player plays the game for the first time)
         if (isNaN(CubeGame.DataManager.getHiscore())){ CubeGame.DataManager.setHiscore(0);         console.log(CubeGame.DataManager.getHiscore());}
         
-        //this.startSetup();
+        this.startSetup();
 
-        // Google font config.
-        // Note: may use own font and remove this script later
-        WebFontConfig = {
-            active: function() {
-                // Note: this reference refers to WebFontConfig
-                // and t is the CubeGame.Setup's this reference
-                t.startSetup(); // Start game when font ready
-            },
-            google: {
-                families: [CubeGame.config.Font+":400,700"]
-            }
-        };
     }
 };
 CubeGame.Setup = function() {
