@@ -28,10 +28,48 @@ CubeGame.factory.addText = function(x, y, text, size, colour) {
     });
 };
 
+/**
+* If the browser doesn't support real local storage
+* a "fake storage" is used instead.
+* The fake storage data can't be saved
+*
+* (Credits to the 2048 game for this idea! Check it out at https://github.com/gabrielecirulli/2048)
+*/
+window.fakeStorage = {
+  _data: {},
+
+  setItem: function (id, val) {
+    return this._data[id] = String(val);
+  },
+
+  getItem: function (id) {
+    return this._data.hasOwnProperty(id) ? this._data[id] : undefined;
+  },
+
+  removeItem: function (id) {
+    return delete this._data[id];
+  }
+};
+
 CubeGame.DataManager = function() {};
+CubeGame.DataManager.initialise = function() {
+    console.log("Local storage supported? "+this.localStorageSupported());
+    this.storage = (this.localStorageSupported()) ? window.localStorage : window.fakeStorage;
+};
+CubeGame.DataManager.localStorageSupported = function() {
+    try {
+        localStorage.setItem("hi", "hi");
+        localStorage.removeItem("hi");
+        return true;
+    } catch (exception) {
+        return false;
+    }
+};
 CubeGame.DataManager.setHiscore = function(score) {
-    localStorage.setItem("CubeGameHiscore", score.toString());
+    this.storage.setItem("CubeGameHiscore", score.toString());
 };
 CubeGame.DataManager.getHiscore = function() {
-    return parseFloat(localStorage.getItem("CubeGameHiscore"));
+    return parseFloat(this.storage.getItem("CubeGameHiscore"));
 }
+
+

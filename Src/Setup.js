@@ -27,6 +27,7 @@ CubeGame.Boot.prototype = {
         
         // 
         CubeGame.config.Font = "Lato";
+        CubeGame.DataManager.initialise();
         
         // Make sure hiscore is not NaN
         // (eg. if the player plays the game for the first time)
