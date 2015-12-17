@@ -68,7 +68,7 @@ CubeGame.Obstacle.prototype.checkWorldBounds = function() {
     }
 };
 /** 
-* Function to reset Laser.
+* Function to reset Obstacle.
 * (There is a built in function reset() but
 * the velocity needs to be set too)
 * 

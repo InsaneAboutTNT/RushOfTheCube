@@ -33,18 +33,12 @@ CubeGame.GameOver.prototype = {
             CubeGame.DataManager.setHiscore(hiscore);
             newHiscore = true;
         }
-        //        this.scoreIs = this.game.add.text(150, 50, "You got", {
-//            font: "30px " + CubeGame.config.Font,
-//            fill: "#5f5f5f"
-//        });
+
         this.scoreIsText = CubeGame.factory.addText(150, 50, "The score is...", 30, "#5f5f5f");
-//        // Score text
+        // Score text
         var scoreStr = CubeGame.Score.toString()+" pts";
         var hiscoreStr = "Hiscore: " + CubeGame.DataManager.getHiscore() +" pts";
-//        this.points = this.game.add.text(150, 120, scoreStr, {
-//            font: "bold 120px " + CubeGame.config.Font,
-//            fill: "#3498db"
-//        });
+
         if (newHiscore) {
             this.newHiscoreText = CubeGame.factory.addText(500, 270, "New Hiscore!!!", 30, "#3498db");
             this.newHiscoreText.anchor.setTo(0.5, 0.5);
