@@ -20,7 +20,7 @@ CubeGame.Menu.prototype = {
             //fill: "#5f5f5f"
         //});
         // Version
-        this.versionText = CubeGame.factory.addText(900, 500, "v1.0.0", 30, "#5f5f5f");
+        this.versionText = CubeGame.factory.addText(900, 500, "v1.1.0", 30, "#5f5f5f");
 
         
         // Bounce logo in from up
