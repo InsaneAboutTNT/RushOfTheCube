@@ -13,9 +13,14 @@ module.exports = function(grunt) {
         concat: {   
             dist: {
                 src: [
+                    "Src/Credits.js",
                     "Src/Game.js",
-                    "Src/Objects.js",
-                    "Src/GameUtils.js"
+                    "Src/GameOver.js",
+                    "Src/GameUtils.js",
+                    "Src/Menu.js",
+                    "Src/Obstacles.js",
+                    "Src/Player.js",
+                    "Src/Setup.js"
                 ],
                 dest: "Src/src.js"
             }

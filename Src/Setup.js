@@ -21,13 +21,12 @@ CubeGame.Boot.prototype = {
         
         CubeGame.config.Game = this.game;
         
-        // 
         CubeGame.config.Font = "Lato";
         CubeGame.DataManager.initialise();
         
         // Make sure hiscore is not NaN
         // (eg. if the player plays the game for the first time)
-        if (isNaN(CubeGame.DataManager.getHiscore())){ CubeGame.DataManager.setHiscore(0);         console.log(CubeGame.DataManager.getHiscore());}
+        if (isNaN(CubeGame.DataManager.getHiscore())){ CubeGame.DataManager.setHiscore(0);}
         
         this.startSetup();
 
@@ -55,9 +54,7 @@ CubeGame.Setup.prototype = {
         var atlasSettings = CubeGame.config.AtlasSettings;
         
         this.game.load.atlasJSONHash(atlasSettings.Name, atlasSettings.Img, atlasSettings.JSON);
-        //this.game.load.audio("Ping", ["Audio/Ping.ogg"]);
         this.game.load.audiosprite("Audiosprite", "Audio/Audiosprite.ogg", "Audio/Audiosprite.json");
-        // Google font config
     },
     create: function() {
         var audiosprite = this.game.add.audioSprite("Audiosprite");

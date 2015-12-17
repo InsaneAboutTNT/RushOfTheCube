@@ -38,17 +38,11 @@ CubeGame.Play.prototype = {
         
         this.game.stage.backgroundColor = "#eeeeee";
 
-        // Create ground
-        //this.ground = new CubeGame.Ground(this.game);
-        //this.game.add.existing(this.ground);
         
         // Player
         this.player = new CubeGame.Player(this.game);
         this.game.add.existing(this.player);
         
-        // Sound
-        //this.ping = this.game.add.audio("Ping");
-        //this.ping.play();
         CubeGame.AudioManager.playAudio("Ping");
 
         this.addEventListeners(); // add input listeners
@@ -56,15 +50,8 @@ CubeGame.Play.prototype = {
         // Obstacles
         this.obstacles = new CubeGame.Obstacles(this.game);
         this.game.add.existing(this.obstacles);
-        // Spawn Timer
 
         CubeGame.ScoreManager.resetScore(); 
-        
-        // Make score text
-//        this.scoreText = this.game.add.text(40, 20, "Score: " + CubeGame.Score.toString(), {
-//            font: "40px " + CubeGame.config.Font,
-//            fill: "#5f5f5f"
-//        });
         this.scoreText = CubeGame.factory.addText(40, 20, "Score: 0", 40, "#5f5f5f");
         
         this.scoreTextSlideIn = this.game.add.tween(this.scoreText).from({x:-300}, 300, Phaser.Easing.Sinusoidal.Out).start();
@@ -123,7 +110,6 @@ CubeGame.Play.prototype = {
         this.scoreText.setText("Score: " + CubeGame.Score);
     },
     update: function() {
-        //this.game.physics.arcade.overlap(this.player, this.obstacles, function() {CubeGame.deadSignal.dispatch();});
         this.player.initObstacleCollisions(this.obstacles);
         this.updateScoreText();
     }

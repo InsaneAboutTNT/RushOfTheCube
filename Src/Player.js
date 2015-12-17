@@ -16,10 +16,6 @@ CubeGame.Player.prototype.initObstacleCollisions = function(obstGroup) {
     this.game.physics.arcade.collide(this, obstGroup, function(){CubeGame.deadSignal.dispatch();});
 };
 CubeGame.Player.prototype.update = function() {
-    // Collide player and ground
-    // Player is dead if player overlaps ground
-    
-    // this.game is the reference to the game the player is running in.
     if(this.y < 0)CubeGame.deadSignal.dispatch();
     if(this.y > CubeGame.config.PageH - 60)CubeGame.deadSignal.dispatch();
 };
