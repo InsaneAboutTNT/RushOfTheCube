@@ -44,6 +44,25 @@ CubeGame.Menu.prototype = {
             .from({x:1500}, 1000, Phaser.Easing.Sinusoidal.Out).start();
         this.versionTextButtonSlideIn = this.game.add.tween(this.versionText.scale)
             .from({x: 0, y: 0}, 300, Phaser.Easing.Sinusoidal.Out).start();
+        
+        // Particles
+        this.particleEmitter = this.game.add.emitter(CubeGame.config.PageW/2, 0, 400);
+        this.particleEmitter.width = CubeGame.config.PageW;
+        
+        this.particleEmitter.makeParticles([CubeGame.config.AtlasSettings.Name],["Player"]);
+
+	    this.particleEmitter.minParticleScale = 0.1;
+	    this.particleEmitter.maxParticleScale = 0.3;
+
+	    this.particleEmitter.setYSpeed(100, 200);
+        this.particleEmitter.setXSpeed(0, 0);
+        
+        this.particleEmitter.setAll("body.allowGravity", false);
+
+	    this.particleEmitter.minRotation = 0;
+	    this.particleEmitter.maxRotation = 0;
+
+	    this.particleEmitter.start(false, 5000, 300, 0);
     },
     /**
     * Start game when play button clicked
