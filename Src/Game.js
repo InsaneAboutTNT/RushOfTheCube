@@ -33,30 +33,42 @@ CubeGame.Play = function() {
 };
 CubeGame.Play.prototype = {
     create: function() {
+
+        this.initGame();
+        this.initPlayer();
+        this.initObstacles();
+        this.initEventListeners(); // add input listeners
+        this.initGUI();
+        this.initConfig();
+    },
+    /**
+    * Add event listeners, as in Phaser.Signal's. 
+    */
+    initGame: function() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
         this.game.physics.arcade.gravity.y = CubeGame.config.GRAVITY;
-        
+        CubeGame.AudioManager.playAudio("Ping");
         
         this.game.stage.backgroundColor = "#eeeeee";
-
-        
+    },
+    initPlayer: function() {
         // Player
         this.player = new CubeGame.Player(this.game);
         this.game.add.existing(this.player);
-        
-        CubeGame.AudioManager.playAudio("Ping");
-
-        this.addEventListeners(); // add input listeners
-
+    },
+    initObstacles: function() {
         // Obstacles
         this.obstacles = new CubeGame.Obstacles(this.game);
         this.game.add.existing(this.obstacles);
-
+    },
+    initGUI: function() {
+        // Score text
         CubeGame.ScoreManager.resetScore(); 
         this.scoreText = CubeGame.factory.addText(40, 20, "Score: 0", 40, "#5f5f5f");
         
         this.scoreTextSlideIn = this.game.add.tween(this.scoreText).from({x:-300}, 300, Phaser.Easing.Sinusoidal.Out).start();
-        
+    },
+    initConfig: function() {
         // Configuration
         
         /** When you get a certain score,
@@ -81,13 +93,8 @@ CubeGame.Play.prototype = {
         // Increase score every 1 second
         // Score is based on survival time
         this.game.time.events.loop(1000, this.updateScore, this);
-        
-        
     },
-    /**
-    * Add event listeners, as in Phaser.Signal's. 
-    */
-    addEventListeners: function() {
+    initEventListeners: function() {
         this.input.onDown.add(this.player.jump, this.player);
         
         this.spaceBarKey = this.game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);

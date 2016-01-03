@@ -4,6 +4,12 @@ CubeGame.Menu.prototype = {
     preload: function() {
     },
     create: function() {
+        this.initMenu();
+        this.initMenuTweens();
+        this.initParticleEmitter();
+        
+    },
+    initMenu: function() {
         this.game.stage.backgroundColor = "#eeeeee";
         
         this.logo = this.game.add.sprite(250, 100, "Textures", "Logo");
@@ -21,8 +27,8 @@ CubeGame.Menu.prototype = {
         //});
         // Version
         this.versionText = CubeGame.factory.addText(900, 500, "v1.1.0", 30, "#5f5f5f");
-
-        
+    },
+    initMenuTweens: function() {
         // Bounce logo in from up
         this.logoBounceIn = this.game.add.tween(this.logo).from({y:-300}, 500, Phaser.Easing.Sinusoidal.Out).start();
 
@@ -44,12 +50,13 @@ CubeGame.Menu.prototype = {
             .from({x:1500}, 1000, Phaser.Easing.Sinusoidal.Out).start();
         this.versionTextButtonSlideIn = this.game.add.tween(this.versionText.scale)
             .from({x: 0, y: 0}, 300, Phaser.Easing.Sinusoidal.Out).start();
-        
+    },
+    initParticleEmitter: function() {
         // Particles
-        this.particleEmitter = this.game.add.emitter(CubeGame.config.PageW/2, 0, 400);
-        this.particleEmitter.width = CubeGame.config.PageW;
+        this.particleEmitter = this.game.add.emitter(this.game.width/2, 0, 400);
+        this.particleEmitter.width = this.game.width;
         
-        this.particleEmitter.makeParticles([CubeGame.config.AtlasSettings.Name],["Player"]);
+        this.particleEmitter.makeParticles([CubeGame.config.AtlasSettings.NAME],["Player"]);
 
 	    this.particleEmitter.minParticleScale = 0.1;
 	    this.particleEmitter.maxParticleScale = 0.3;
