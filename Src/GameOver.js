@@ -68,7 +68,7 @@ CubeGame.GameOver.prototype = {
         this.buttonsGroup.add(this.replayButton);
         this.buttonsGroup.add(this.menuButton);
         
-        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:CubeGame.config.PageW + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
+        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:this.game.width + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
     },
     startPlay: function() {
         this.game.state.start("Play");

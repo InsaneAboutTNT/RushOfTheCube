@@ -16,16 +16,16 @@ var CubeGame = function() {
 * @enum {Number}
 */
 CubeGame.config = {
-    Font: "Lato",
-    ScrollVelocity: -450,
-    Gravity: 800,
-    JumpVelocity: -300,
+    FONT: "Lato",
+    SCROLL_VELOCITY: -450,
+    GRAVITY: 800,
+    JUMP_VELOCITY: -300,
     AtlasSettings: {
-        Name: "Textures",
+        NAME: "Textures",
         JSON: "Textures.json",
-        Img: "Textures.png"
+        IMG: "Textures.png"
     },
-    Game: null
+    GAME: null
 };
 
 
@@ -34,7 +34,8 @@ CubeGame.Play = function() {
 CubeGame.Play.prototype = {
     create: function() {
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
-        this.game.physics.arcade.gravity.y = CubeGame.config.Gravity;
+        this.game.physics.arcade.gravity.y = CubeGame.config.GRAVITY;
+        
         
         this.game.stage.backgroundColor = "#eeeeee";
 

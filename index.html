@@ -19,9 +19,9 @@
     <body>
         <script>
             (function() {
-                CubeGame.config.PageW = 1024;
-                CubeGame.config.PageH = 576;
-                var game = new Phaser.Game(CubeGame.config.PageW, CubeGame.config.PageH, Phaser.CANVAS, "game");
+                CubeGame.config.PAGE_W = 1024;
+                CubeGame.config.PAGE_H = 576;
+                var game = new Phaser.Game(1024, 576, Phaser.CANVAS, "game");
 
                 game.state.add("Setup", CubeGame.Setup);
                 game.state.add("Boot", CubeGame.Boot);

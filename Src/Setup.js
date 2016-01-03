@@ -53,7 +53,7 @@ CubeGame.Setup.prototype = {
 //        this.game.load.image("MenuButton", "Assets/MenuButton.png");
         var atlasSettings = CubeGame.config.AtlasSettings;
         
-        this.game.load.atlasJSONHash(atlasSettings.Name, atlasSettings.Img, atlasSettings.JSON);
+        this.game.load.atlasJSONHash(atlasSettings.NAME, atlasSettings.IMG, atlasSettings.JSON);
         this.game.load.audiosprite("Audiosprite", "Audio/Audiosprite.ogg", "Audio/Audiosprite.json");
     },
     create: function() {
