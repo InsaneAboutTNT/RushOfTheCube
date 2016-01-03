@@ -23,7 +23,7 @@ CubeGame.AudioManager.playAudio = function(key) {
 CubeGame.factory = function() {}
 CubeGame.factory.addText = function(x, y, text, size, colour) {
     return CubeGame.config.Game.add.text(x, y, text, {
-        font: size + "px " + CubeGame.config.Font,
+        font: size + "px " + CubeGame.config.FONT,
         fill: colour
     });
 };

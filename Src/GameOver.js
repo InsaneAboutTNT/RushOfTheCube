@@ -19,8 +19,10 @@ CubeGame.GameOver.prototype = {
     preload: function() {
     },
     create: function() {
-        
-        
+        this.initGameOverMenu();
+        this.initGameOverTweens();
+    },
+    initGameOverMenu: function() {
         this.game.stage.backgroundColor = "#eeeeee";
 
         // Group contains elements that show score.
@@ -58,7 +60,8 @@ CubeGame.GameOver.prototype = {
         this.gameOverGroup.add(this.scoreIsText);
         this.gameOverGroup.add(this.scoreText);
         this.gameOverGroup.add(this.hiscoreText);
-        
+    },
+    initGameOverTweens: function() {    
         this.gameOverSlideIn = this.game.add.tween(this.gameOverGroup).from({x:-300}, 200, Phaser.Easing.Sinusoidal.Out).start();
         
         this.replayButton = this.game.add.button(300, 400, "Textures", this.startPlay, this);
@@ -68,7 +71,7 @@ CubeGame.GameOver.prototype = {
         this.buttonsGroup.add(this.replayButton);
         this.buttonsGroup.add(this.menuButton);
         
-        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:CubeGame.config.PageW + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
+        this.buttonsSlideIn = this.game.add.tween(this.buttonsGroup).from({x:this.game.width + 200}, 500, Phaser.Easing.Sinusoidal.Out).start();
     },
     startPlay: function() {
         this.game.state.start("Play");

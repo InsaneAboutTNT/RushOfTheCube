@@ -40,8 +40,8 @@ CubeGame.Obstacles.prototype.spawn = function() {
         // Try to fetch an obstacle from the pool
         // Determines sprite to be used from Game.config.obstacleTypes
         var seed = this.game.rnd.integerInRange(0, 1);
-        var yPos = this.game.rnd.integerInRange(50, CubeGame.config.PageH - 50);    
-        this.fetchObstacle(this.game, CubeGame.config.PageW, yPos, CubeGame.config.obstacleTypes[seed]);
+        var yPos = this.game.rnd.integerInRange(50, this.game.height - 50);    
+        this.fetchObstacle(this.game, this.game.width, yPos, CubeGame.config.obstacleTypes[seed]);
 };
 
 // --------------------------------------------------------------
@@ -85,7 +85,7 @@ CubeGame.Obstacle.prototype.reuse = function(game, x, y, key) {
     this.body.allowGravity = false;
     this.hasScored = false;
     
-    this.body.velocity.x = CubeGame.config.ScrollVelocity;
+    this.body.velocity.x = CubeGame.config.SCROLL_VELOCITY;
 };
 CubeGame.Obstacle.prototype.stop = function() {
     this.body.velocity.x = 0;
