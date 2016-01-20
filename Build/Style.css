@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('Fonts/LatoLatin-Regular.woff2') format('woff2'),
+       url('Fonts/LatoLatin-Regular.woff') format('woff'),
+       url('Fonts/LatoLatin-Regular.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    width: 100%;
+}
