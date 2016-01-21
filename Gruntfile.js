@@ -2,10 +2,10 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         audiosprite: {
-            all: {
+            makeAudioSprite: {
                 output: "Audio/Audiosprite",
                 files: "Audio/Death.ogg Audio/Ping.ogg",
-                export: "ogg",
+                export: "ogg,m4a",
                 ogg_to_oga: false
             }
         },
@@ -70,14 +70,14 @@ module.exports = function(grunt) {
         }
     });
     // Note: only uglifying straight away may cause runtime errors.
+    grunt.loadNpmTasks("grunt-audiosprite");
     grunt.loadNpmTasks("grunt-contrib-clean");
     grunt.loadNpmTasks("grunt-contrib-copy");
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-string-replace");
-    grunt.loadNpmTasks("grunt-audiosprite");
 
     grunt.registerTask("build", ["clean", "copy", "string-replace", "concat", "uglify"]);
-    grunt.registerTask("audiosprite", ["audiosprite"]);
+    grunt.registerTask("makeAudioSprite", ["audiosprite"]);
 
 };

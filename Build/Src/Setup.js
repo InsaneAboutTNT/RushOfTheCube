@@ -54,7 +54,7 @@ CubeGame.Setup.prototype = {
         var atlasSettings = CubeGame.config.AtlasSettings;
 
         this.game.load.atlasJSONHash(atlasSettings.NAME, atlasSettings.IMG, atlasSettings.JSON);
-        this.game.load.audiosprite("Audiosprite", "Audio/Audiosprite.ogg", "Audio/Audiosprite.json");
+        this.game.load.audiosprite("Audiosprite", ["Audio/Audiosprite.ogg","Audio/Audiosprite.m4a"], "Audio/Audiosprite.json");
     },
     create: function() {
         var audiosprite = this.game.add.audioSprite("Audiosprite");

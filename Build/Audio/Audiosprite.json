@@ -1,6 +1,7 @@
 {
   "resources": [
-    "Audio/Audiosprite.ogg"
+    "Audio/Audiosprite.ogg",
+    "Audio/Audiosprite.m4a"
   ],
   "spritemap": {
     "Death": {
