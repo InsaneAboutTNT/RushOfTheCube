@@ -10,13 +10,11 @@ module.exports = function(grunt) {
             }
         },
         clean: {
-            build: {
-                src: ["Build"]
-            }
+            build: ["Build/**"]
         },
         copy: {
             build: {
-                src: ["index.html", "Fonts/*", "Src/*", "Audio/*", "Style.css", "Textures.json", "Textures.png"],
+                src: ["index.html", "Fonts/*", "Src/phaser.min.js", "Audio/*", "Style.css", "Textures.json", "Textures.png"],
                 dest: "Build",
                 expand: true
             }
@@ -54,9 +52,9 @@ module.exports = function(grunt) {
 //                    "Src/Obstacles.js",
 //                    "Src/Player.js",
 //                    "Src/Setup.js"
-                    "Build/Src/Game.js", // Force Game.js to come first.
-                    "Build/Src/*.js",
-                    "!Build/Src/phaser.min.js"
+                    "Src/Game.js", // Force Game.js to come first.
+                    "Src/*.js",
+                    "!Src/phaser.min.js"
                 ],
                 dest: "Build/Src/src.js"
             }
@@ -77,7 +75,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-string-replace");
 
-    grunt.registerTask("build", ["clean", "copy", "string-replace", "concat", "uglify"]);
+    grunt.registerTask("build", ["clean:build", "copy", "string-replace", "concat", "uglify"]);
     grunt.registerTask("makeAudioSprite", ["audiosprite"]);
 
 };
